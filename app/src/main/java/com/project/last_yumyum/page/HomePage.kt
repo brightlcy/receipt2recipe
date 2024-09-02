@@ -5,11 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.project.last_yumyum.Adapter.RVAdapter
 import com.project.last_yumyum.Dataclass.MainPage
@@ -41,11 +43,12 @@ class HomePage : AppCompatActivity() {
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
         recyclerView.adapter = rvAdapter
-        recyclerView.layoutManager = GridLayoutManager(this, 3) // 3개씩 출력
+        recyclerView.layoutManager = GridLayoutManager(this, 1) // 1개씩 출력
 
         val topFiveRecyclerView = findViewById<RecyclerView>(R.id.topFive)
         topFiveRecyclerView.adapter = topFiveAdapter
-        topFiveRecyclerView.layoutManager = GridLayoutManager(this, 5)
+        topFiveRecyclerView.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         // 기본적으로 일간 레시피 로드
         fetchRecipes(RetrofitClient.api.getDailyRecipes())
@@ -65,7 +68,10 @@ class HomePage : AppCompatActivity() {
 
     private fun fetchRecipes(call: Call<List<MainPage>>) {
         call.enqueue(object : Callback<List<MainPage>> {
-            override fun onResponse(call: Call<List<MainPage>>, response: Response<List<MainPage>>) {
+            override fun onResponse(
+                call: Call<List<MainPage>>,
+                response: Response<List<MainPage>>
+            ) {
                 if (response.isSuccessful) {
                     val recipes = response.body()
                     if (recipes != null) {
@@ -80,7 +86,11 @@ class HomePage : AppCompatActivity() {
                         Toast.makeText(this@HomePage, "응답 데이터가 비어 있습니다.", Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Toast.makeText(this@HomePage, "서버 응답이 실패했습니다. 코드: ${response.code()}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@HomePage,
+                        "서버 응답이 실패했습니다. 코드: ${response.code()}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     Log.e("API_ERROR", response.errorBody()?.string() ?: "Error body is null")
                 }
             }
@@ -94,7 +104,10 @@ class HomePage : AppCompatActivity() {
 
     private fun fetchTopFiveRecipes() {
         RetrofitClient.api.getTopFiveRecipes().enqueue(object : Callback<List<MainPage>> {
-            override fun onResponse(call: Call<List<MainPage>>, response: Response<List<MainPage>>) {
+            override fun onResponse(
+                call: Call<List<MainPage>>,
+                response: Response<List<MainPage>>
+            ) {
                 if (response.isSuccessful) {
                     val topFiveRecipes = response.body()
                     if (topFiveRecipes != null) {
@@ -109,7 +122,11 @@ class HomePage : AppCompatActivity() {
                         Toast.makeText(this@HomePage, "응답 데이터가 비어 있습니다.", Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Toast.makeText(this@HomePage, "서버 응답이 실패했습니다. 코드: ${response.code()}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@HomePage,
+                        "서버 응답이 실패했습니다. 코드: ${response.code()}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     Log.e("API_ERROR", response.errorBody()?.string() ?: "Error body is null")
                 }
             }
@@ -123,29 +140,31 @@ class HomePage : AppCompatActivity() {
 
     ////////////////////////하단바 페이지변경
     private fun setupBottomNavigation() {
-        val transitionHomeButton = findViewById<Button>(R.id.home)
+        val transitionHomeButton =
+            findViewById<RelativeLayout>(R.id.home_button) // RelativeLayout으로 변경
         transitionHomeButton.setOnClickListener {
             val intent = Intent(this, HomePage::class.java)
             startActivity(intent)
         }
-        val transitionListItemButton = findViewById<Button>(R.id.list_item)
+
+        val transitionListItemButton = findViewById<RelativeLayout>(R.id.list_button)
         transitionListItemButton.setOnClickListener {
             val intent = Intent(this, RetainedIngredient::class.java)
             startActivity(intent)
         }
-        val transitionPictureAddButton = findViewById<Button>(R.id.picture_add)
+        val transitionPictureAddButton = findViewById<RelativeLayout>(R.id.camera_button)
         transitionPictureAddButton.setOnClickListener {
             val intent = Intent(this, PictureAdd::class.java)
             startActivity(intent)
         }
 
-        val transitionSearchButton = findViewById<Button>(R.id.search)
+        val transitionSearchButton = findViewById<RelativeLayout>(R.id.search_button)
         transitionSearchButton.setOnClickListener {
             val intent = Intent(this, SearchRecipe::class.java)
             startActivity(intent)
         }
 
-        val transitionRecommendButton = findViewById<Button>(R.id.recommend)
+        val transitionRecommendButton = findViewById<RelativeLayout>(R.id.recommend_button)
         transitionRecommendButton.setOnClickListener {
             val intent = Intent(this, Recommend::class.java)
             startActivity(intent)

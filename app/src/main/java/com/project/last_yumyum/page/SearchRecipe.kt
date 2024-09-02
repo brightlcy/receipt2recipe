@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -32,11 +33,12 @@ class SearchRecipe : AppCompatActivity() {
             insets
         }
 
-        val searchButton: Button = findViewById(R.id.search_button)
+        val searchButton1: Button = findViewById(R.id.search_button1)
         val searchEditText: EditText = findViewById(R.id.searchEditText)
         val listView: ListView = findViewById(R.id.listViewRecipes)
+
         setupBottomNavigation()
-        searchButton.setOnClickListener {
+        searchButton1.setOnClickListener {
             val query = searchEditText.text.toString()
             RetrofitClient.api.searchRecipe(query).enqueue(object : Callback<List<MainPage>> {
                 override fun onResponse(
@@ -74,34 +76,33 @@ class SearchRecipe : AppCompatActivity() {
 
     ////////////////////////하단바 페이지변경
     private fun setupBottomNavigation() {
-        val transitionHomeButton = findViewById<Button>(R.id.home)
+        val transitionHomeButton = findViewById<RelativeLayout>(R.id.home_button) // RelativeLayout으로 변경
         transitionHomeButton.setOnClickListener {
             val intent = Intent(this, HomePage::class.java)
             startActivity(intent)
         }
-        val transitionListItemButton = findViewById<Button>(R.id.list_item)
+
+        val transitionListItemButton = findViewById<RelativeLayout>(R.id.list_button)
         transitionListItemButton.setOnClickListener {
             val intent = Intent(this, RetainedIngredient::class.java)
             startActivity(intent)
         }
-        val transitionPictureAddButton = findViewById<Button>(R.id.picture_add)
+        val transitionPictureAddButton = findViewById<RelativeLayout>(R.id.camera_button)
         transitionPictureAddButton.setOnClickListener {
             val intent = Intent(this, PictureAdd::class.java)
             startActivity(intent)
         }
 
-        val transitionSearchButton = findViewById<Button>(R.id.search)
+        val transitionSearchButton = findViewById<RelativeLayout>(R.id.search_button)
         transitionSearchButton.setOnClickListener {
             val intent = Intent(this, SearchRecipe::class.java)
             startActivity(intent)
         }
 
-        val transitionRecommendButton = findViewById<Button>(R.id.recommend)
+        val transitionRecommendButton = findViewById<RelativeLayout>(R.id.recommend_button)
         transitionRecommendButton.setOnClickListener {
             val intent = Intent(this, Recommend::class.java)
             startActivity(intent)
         }
-
-
     }
 }

@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.ListView
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -82,6 +83,9 @@ class PictureAdd : AppCompatActivity() {
         findViewById<Button>(R.id.button_take_photo).setOnClickListener {
             checkPermission(arrayOf(Manifest.permission.CAMERA), CAMERA_CODE)
         }
+
+        // 하단바 페이지 변경
+        setupBottomNavigation()
     }
 
     private fun checkPermission(permissions: Array<out String>, requestCode: Int) {
@@ -216,4 +220,35 @@ class PictureAdd : AppCompatActivity() {
         })
     }
 
+
+    private fun setupBottomNavigation() {
+        val transitionHomeButton = findViewById<RelativeLayout>(R.id.home_button) // RelativeLayout으로 변경
+        transitionHomeButton.setOnClickListener {
+            val intent = Intent(this, HomePage::class.java)
+            startActivity(intent)
+        }
+
+        val transitionListItemButton = findViewById<RelativeLayout>(R.id.list_button)
+        transitionListItemButton.setOnClickListener {
+            val intent = Intent(this, RetainedIngredient::class.java)
+            startActivity(intent)
+        }
+        val transitionPictureAddButton = findViewById<RelativeLayout>(R.id.camera_button)
+        transitionPictureAddButton.setOnClickListener {
+            val intent = Intent(this, PictureAdd::class.java)
+            startActivity(intent)
+        }
+
+        val transitionSearchButton = findViewById<RelativeLayout>(R.id.search_button)
+        transitionSearchButton.setOnClickListener {
+            val intent = Intent(this, SearchRecipe::class.java)
+            startActivity(intent)
+        }
+
+        val transitionRecommendButton = findViewById<RelativeLayout>(R.id.recommend_button)
+        transitionRecommendButton.setOnClickListener {
+            val intent = Intent(this, Recommend::class.java)
+            startActivity(intent)
+        }
+    }
 }

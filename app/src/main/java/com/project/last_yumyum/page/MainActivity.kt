@@ -40,13 +40,16 @@ class MainActivity : AppCompatActivity() {
         etPassword = findViewById(R.id.et_password)
         btnRegister = findViewById(R.id.btn_register)
 
-/*
+
+        /*
         // 임시테스트 이후 지울것 //
         btnLogin.setOnClickListener {
             val intent2 = Intent(this@MainActivity, HomePage::class.java)
             startActivity(intent2)
         }
         */
+
+
 
 
 
@@ -97,6 +100,7 @@ class MainActivity : AppCompatActivity() {
 
             })
         }
+
 
     }
 

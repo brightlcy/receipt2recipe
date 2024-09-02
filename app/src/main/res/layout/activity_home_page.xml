@@ -5,155 +5,291 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".page.HomePage">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentTop="true"
+        android:background="#19000000"
+        app:layout_constraintBottom_toTopOf="@+id/nestedScrollView" /> <!-- 연한 색상으로 조정 -->
+
+
+
+    <!-- 상단 컨텐츠 영역 -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginBottom="61dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- 오늘의 추천 레시피 영역 -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/home_round_recycle">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:fontFamily="sans-serif"
+                    android:text="오늘의 추천 레시피"
+                    android:textColor="#333333"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/topFive"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView3"
+                    android:layout_marginTop="15dp"
+                    android:nestedScrollingEnabled="false" />
+            </RelativeLayout>
+
+            <!-- 이 레시피들로 오늘의 식탁을 특별하게 만들어 보세요! 영역 -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/home_round_recycle">
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="이 레시피들로 오늘의 식탁을 특별하게 만들어 보세요!"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:background="#FFFFFF" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView4"
+                    android:layout_marginTop="15dp"
+                    android:nestedScrollingEnabled="false" />
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentBottom="true"
+        android:background="#19000000"
+        app:layout_constraintBottom_toBottomOf="@+id/nestedScrollView" />
+    <android.widget.Button
+        android:id="@+id/favoriteButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bookmark_50dp_e8eaed_fill0_wght200_grad_25_opsz48"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/home_button"
+        android:layout_width="72dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="15dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="transitionToNextActivity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/home"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignBottom="@+id/home_text"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="6dp"
+            android:src="@drawable/home_24dp_e8eaed_fill0_wght400_grad0_opsz24"
+            app:tint="#28A745" />
+
+        <TextView
+            android:id="@+id/home_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="홈"
+            android:textColor="#28A745"
+            android:textSize="11dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/list_button"
+        android:layout_width="72dp"
+        android:layout_height="61dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="transitionToNextActivity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.256"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/list_item_image"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="6dp"
+            android:src="@drawable/list_24dp_fill0_wght400_grad0_opsz24" />
+
+        <TextView
+            android:id="@+id/list_item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="재료"
+            android:textColor="#4D595F"
+            android:textSize="11dp" />
+    </RelativeLayout>
 
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="16dp">
+        android:id="@+id/camera_button"
+        android:layout_width="72dp"
+        android:layout_height="61dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="168dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="transitionToNextActivity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="166dp"
-            android:layout_height="57dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="38dp"
-            android:layout_marginEnd="207dp"
-            android:layout_marginBottom="637dp"
-            android:text="인기 레시피"
-            android:textSize="32dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="166dp"
-            android:layout_height="57dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="100dp"
-            android:layout_marginEnd="145dp"
-            android:layout_marginBottom="589dp"
-            android:text="Top 5"
-            android:textSize="32dp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/favoriteButton"
-            android:layout_width="34dp"
-            android:layout_height="32dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="347dp"
-            android:layout_marginEnd="31dp"
-            android:layout_marginBottom="655dp"
-            android:background="@drawable/favorite_24dp_fill0_wght400_grad0_opsz24"
-            android:onClick="transitionToNextActivity"
-            app:backgroundTint="@color/black" />
-
-
-        <androidx.recyclerview.widget.RecyclerView
-
-            android:id="@+id/rv"
-            android:layout_width="match_parent"
-            android:layout_height="285dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="67dp" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="441dp"
-            android:background="#39000000" />
+        <ImageView
+            android:id="@+id/camera_item_image"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="false"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="6dp"
+            android:src="@drawable/add_a_photo_24dp_fill0_wght400_grad0_opsz24" />
 
         <TextView
-            android:id="@+id/reciptRanking"
-            android:layout_width="161dp"
-            android:layout_height="48dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="245dp"
-            android:layout_marginBottom="388dp"
-            android:text="레시피 랭킹"
-            android:textSize="30sp" />
-
-
-
-        <Button
-            android:id="@+id/home"
-            android:layout_width="52dp"
+            android:id="@+id/camera_picture_add"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:layout_above="@id/camera_item_image"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="327dp"
-            android:layout_marginBottom="15dp"
-            android:background="@drawable/home_24dp_fill0_wght400_grad0_opsz24"
-            android:onClick="transitionToNextActivity"
-            app:backgroundTint="#7E7E7E" />
-
-        <Button
-            android:id="@+id/search"
-            android:layout_width="52dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="96dp"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/search_24dp_fill0_wght400_grad0_opsz24"
-            android:onClick="transitionToNextActivity"
-            app:backgroundTint="@color/black" />
-
-        <Button
-            android:id="@+id/picture_add"
-            android:layout_width="52dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="172dp"
-            android:layout_marginBottom="13dp"
-            android:background="@drawable/add_a_photo_24dp_fill0_wght400_grad0_opsz24"
-            android:onClick="transitionToNextActivity"
-            app:backgroundTint="@color/black" />
-
-        <Button
-            android:id="@+id/list_item"
-            android:layout_width="52dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="253dp"
-            android:layout_marginBottom="14dp"
-            android:background="@drawable/list_24dp_fill0_wght400_grad0_opsz24"
-            android:onClick="transitionToNextActivity"
-            app:backgroundTint="@color/black" />
-
-        <Button
-            android:id="@+id/recommend"
-            android:layout_width="52dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="22dp"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/recommend_24dp_fill0_wght400_grad0_opsz24"
-            android:onClick="transitionToNextActivity"
-            app:backgroundTint="@color/black" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/topFive"
-            android:layout_width="match_parent"
-            android:layout_height="154dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="444dp" />
-
-
+            android:layout_centerHorizontal="true"
+            android:text="영수증 촬영"
+            android:textColor="#4D595F"
+            android:textSize="11dp" />
     </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/search_button"
+        android:layout_width="72dp"
+        android:layout_height="61dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="88dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="transitionToNextActivity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/search_item_image"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="false"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="6dp"
+            android:src="@drawable/search_24dp_fill0_wght400_grad0_opsz24" />
+
+        <TextView
+            android:id="@+id/recipeSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/search_item_image"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="레시피 검색"
+            android:textColor="#4D595F"
+            android:textSize="11dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/recommend_button"
+        android:layout_width="72dp"
+        android:layout_height="61dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="15dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="transitionToNextActivity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/recommend_item_image"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="false"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="6dp"
+            android:src="@drawable/recommend_24dp_fill0_wght400_grad0_opsz24" />
+
+        <TextView
+            android:id="@+id/recipeRecommend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/recommend_item_image"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="레시피 추천"
+            android:textSize="11dp" />
+    </RelativeLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
